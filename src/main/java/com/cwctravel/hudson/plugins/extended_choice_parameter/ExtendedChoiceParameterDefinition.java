@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -107,6 +108,8 @@ public class ExtendedChoiceParameterDefinition extends ParameterDefinition {
 
 	private transient GroovyShell groovyShell;
 
+    private final UUID uuid;
+
 	@Extension @Symbol({"extendedChoice"})
 	public static class DescriptorImpl extends ParameterDescriptor {
 		@Override
@@ -172,7 +175,7 @@ public class ExtendedChoiceParameterDefinition extends ParameterDefinition {
 				@QueryParameter final String defaultPropertyKey, @QueryParameter final String type) throws IOException, ServletException {
 			return doCheckPropertyFile(defaultPropertyFile, defaultPropertyKey, type);
 		}
-
+		
 		@Override
 		public ExtendedChoiceParameterDefinition newInstance(StaplerRequest req, JSONObject formData) throws FormException {
 			String name = null;
@@ -470,6 +473,7 @@ public class ExtendedChoiceParameterDefinition extends ParameterDefinition {
 	//@formatter:on
 
 		super(name, description);
+        this.uuid = UUID.randomUUID();
 
 		this.type = type;
 		this.value = value;
@@ -512,6 +516,10 @@ public class ExtendedChoiceParameterDefinition extends ParameterDefinition {
 		this.multiSelectDelimiter = multiSelectDelimiter;
 	}
 
+    public String getDivUUID() {
+        return getName() + "-" + uuid;
+    }
+    
 	private Map<String, Boolean> computeDefaultValueMap() {
 		Map<String, Boolean> defaultValueMap = null;
 		String effectiveDefaultValue = computeEffectiveDefaultValue();
