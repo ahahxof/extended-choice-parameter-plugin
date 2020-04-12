@@ -40,13 +40,13 @@
                         </select>
                       </j:if>
                       <j:if test="${type eq 'PT_MULTI_SELECT'}">
-                        <select name="value" class="select" id="select" style="width: 100%" multiple="multiple" size="${it.visibleItemCount}">
+                        <select name="value" class="select_choice" id="select_choice" style="width: 100%" multiple="multiple" size="${it.visibleItemCount}">
                           <st:include page="selectContent.jelly"/>
                         </select>
-                        <p><input class='choices_quick_filter' type='text' value='' name='quickFilter' placeholder='Filtering on parameter: "${it.name}". Enter regular expression e.g. .*vul, vul|sir and etc.' style="width: 100%" id="filter"/></p>
+                        <p><input class='choices_quick_filter' type='text' value='' name='quickFilter' placeholder='Filtering on parameter: "${it.name}". Enter regular expression e.g. .*vul, vul|sir and etc.' style="width: 100%" id="filter_choice"/></p>
                         <script type="text/javascript">
                           var parentDiv = jQuery('#${divId}');
-                          new ListChoices.QuickFilter(parentDiv.find('.select').get(0),
+                          new ListChoices.QuickFilter(parentDiv.find('.select_choice').get(0),
                                   parentDiv.find('.choices_quick_filter').get(0),
                                   "${it.defaultValue}", "${it.defaultValue}");
                         </script>
